@@ -26,6 +26,22 @@ int main(){
 
     scanf("%d",&op);
 
+    while(op != 1 && op != 2 && op != 3 && op != 4 && op != 5){
+        printf("Entrada não aceita, por favor tente novamente\n");
+
+        printf("Selecione uma operação: \n");
+        printf("1. Adição\n");
+        printf("2. Subtração\n");
+        printf("3. Multiplicação\n");
+        printf("4. Divisão\n");
+        printf("5. Sair\n");
+        printf("Opção: ");
+        scanf("%d",&op);
+
+        while (getchar() != '\n'); 
+        
+    }
+
     if(op == 5){
         accept = 'n';
         printf("Obrigado por usar a calculadora! Até a próxima.");
