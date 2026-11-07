@@ -26,6 +26,11 @@ int main(){
 
     scanf("%d",&op);
 
+    if(op == 5){
+        accept = 'n';
+        break;
+    }
+
     printf("Digite o primeiro número: ");
     scanf("%d",&first_number);
     printf("Digite o segundo número: ");
