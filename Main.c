@@ -56,7 +56,7 @@ int main(){
     scanf(" %c",&accept);
 
     if(accept == 's'){
-        
+        system("cls"); 
     }
     else{
         printf("Obrigado por usar a calculadora! Até a próxima.");
