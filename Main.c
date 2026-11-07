@@ -21,7 +21,8 @@ int main(){
     printf("5. Sair\n");
     printf("Opção: ");
 
-    int op,first_number,second_number,value;
+    int op;
+    float first_number,second_number,value;
     char c;
 
     scanf("%d",&op);
@@ -49,9 +50,9 @@ int main(){
     }
 
     printf("Digite o primeiro número: ");
-    scanf("%d",&first_number);
+    scanf("%f",&first_number);
     printf("Digite o segundo número: ");
-    scanf("%d",&second_number);
+    scanf("%f",&second_number);
 
     switch(op){
         case 1:
@@ -69,19 +70,40 @@ int main(){
         case 4:
             if(first_number == 0 || second_number == 0){
                 while(first_number == 0 || second_number == 0){
+                    if(accept == 'n' || accept == 'N'){
+                        break;
+                    }
                     printf("Erro: Divisão por zero não é permitida.\n");
-                    printf("Digite o primeiro número: ");
-                    scanf("%d",&first_number);
-                    printf("Digite o segundo número: ");
-                    scanf("%d",&second_number);
+
+                    accept = 'a';
+                    while(accept != 's' && accept != 'S' && accept != 'n' && accept != 'N'){
+                        printf("Deseja realizar outra operação? (s/n): ");
+                        scanf(" %c",&accept);
+                        if(accept == 's' || accept == 'S'){
+                            printf("Digite o primeiro número: ");
+                            scanf("%f",&first_number);
+                            printf("Digite o segundo número: ");
+                            scanf("%f",&second_number);
+                        }
+                        else if(accept == 'n' || accept == 'N'){
+                            accept = 'n';
+                            printf("Obrigado por usar a calculadora! Até a próxima.");
+                            break;
+                        }
+                        else{
+                            printf("Resposta inválida. Por favor, digite 's' para sim ou 'n' para não.\n");
+                        }
+                }
                 }
             }
             value = first_number / second_number;
             c = '/';
         break;
     }
-
-    printf("Resultado: %d %c %d = %d\n",first_number, c, second_number, value);
+    if(accept == 'n' || accept == 'N'){
+        break;
+    }
+    printf("Resultado: %f %c %f = %f\n",first_number, c, second_number, value);
 
     accept = 'a';
 
