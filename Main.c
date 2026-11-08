@@ -2,11 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include <windows.h>
+
+void limpar_buffer(void){
+    int ch;
+    while((ch = getchar()) != '\n' && ch != EOF);
+}
 
 int main(){
     setlocale(LC_ALL, "Portuguese");
-    //SetConsoleOutputCP(CP_UTF8); 
+
     char accept = 's';
 
     do{
@@ -21,13 +25,14 @@ int main(){
     printf("5. Sair\n");
     printf("Opção: ");
 
-    int op;
+    int op,ok;
     float first_number,second_number,value;
     char c;
 
-    scanf("%d",&op);
+    ok = scanf("%d", &op);
+    limpar_buffer();
 
-    while(op != 1 && op != 2 && op != 3 && op != 4 && op != 5){
+    while(ok != 1 || op < 1 || op > 5){
         printf("Entrada não aceita, por favor tente novamente\n");
 
         printf("Selecione uma operação: \n");
@@ -37,10 +42,9 @@ int main(){
         printf("4. Divisão\n");
         printf("5. Sair\n");
         printf("Opção: ");
-        scanf("%d",&op);
 
-        while (getchar() != '\n'); 
-        
+        ok = scanf("%d", &op);   // precisa do "ok ="
+        limpar_buffer();
     }
 
     if(op == 5){
