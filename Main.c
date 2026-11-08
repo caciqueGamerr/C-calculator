@@ -2,13 +2,11 @@
 #include <stdlib.h>
 #include <locale.h>
 
-// Apaga tudo que sobrou digitado na linha, até o Enter
 void limpar_buffer(){
     int ch;
     while((ch = getchar()) != '\n' && ch != EOF);
 }
 
-// Pede um número, repete até o usuário digitar um número válido e devolve o valor
 float ler_numero(char mensagem[]){
     float n;
     int ok;
@@ -16,7 +14,7 @@ float ler_numero(char mensagem[]){
 
     printf("%s", mensagem);
     ok = scanf("%f", &n);
-    next = getchar();               // lê o caractere logo depois do número
+    next = getchar();
 
     while(ok != 1 || next != '\n'){
         if(next != '\n'){
@@ -34,11 +32,13 @@ int main(){
     setlocale(LC_NUMERIC, "C");
 
     char accept = 's';
-    int op, ok;
+    int op, ok, erro;
     float first_number, second_number, value;
     char c, next;
 
     do{
+        erro = 0;                   // zera a cada volta
+
         printf("===============================\n");
         printf("     Calculadora Simples\n");
         printf("===============================\n");
@@ -85,20 +85,24 @@ int main(){
             break;
             case 4:
                 if(second_number == 0){
-                    printf("Erro: Divisão por zero não é permitida.\n\n");
-                    continue;       // volta direto para o menu
+                    printf("Erro: Divisão por zero não é permitida.\n");
+                    erro = 1;       // marca o erro
                 }
-                value = first_number / second_number;
-                c = '/';
+                else{
+                    value = first_number / second_number;
+                    c = '/';
+                }
             break;
         }
 
-        printf("Resultado: %f %c %f = %f\n", first_number, c, second_number, value);
+        if(erro == 0){
+            printf("Resultado: %f %c %f = %f\n", first_number, c, second_number, value);
+        }
 
         accept = 'a';
         while(accept != 's' && accept != 'S' && accept != 'n' && accept != 'N'){
             printf("Deseja realizar outra operação? (s/n): ");
-            ok = scanf("%c", &accept);
+            scanf("%c", &accept);
             next = getchar();
             if(next != '\n'){
                 limpar_buffer();
